@@ -20,7 +20,9 @@ class kafka::broker::service(
   }
 
   if $service_install {
-    if $::service_provider == 'systemd' {
+    # Workaround for now, puppet 4 + jessie now uses systemd
+    # and this code is to old to work properly.
+    if false and $::service_provider == 'systemd' {
       include ::systemd
 
       file { '/usr/lib/systemd/system/kafka.service':
